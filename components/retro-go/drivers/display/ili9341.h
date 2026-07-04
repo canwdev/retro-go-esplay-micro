@@ -151,7 +151,7 @@ static void lcd_set_backlight(float percent)
     int error_code = 0;
 
 #if defined(RG_GPIO_LCD_BCKL)
-    error_code = ledc_set_fade_time_and_start(LEDC_LOW_SPEED_MODE, LEDC_CHANNEL_0, 0x1FFF * level, 50, 0);
+    error_code = ledc_set_fade_time_and_start(LEDC_LOW_SPEED_MODE, LEDC_CHANNEL_0, 0x3FF * level, 50, 0);
 #endif
 
     if (error_code)
@@ -198,9 +198,9 @@ static void lcd_init(void)
     // Initialize backlight at 0% to avoid the lcd reset flash
     ledc_timer_config(&(ledc_timer_config_t){
         .speed_mode = LEDC_LOW_SPEED_MODE,
-        .duty_resolution = LEDC_TIMER_13_BIT,
+        .duty_resolution = LEDC_TIMER_10_BIT,
         .timer_num = LEDC_TIMER_0,
-        .freq_hz = 5000,
+        .freq_hz = 20000,
     });
     ledc_channel_config(&(ledc_channel_config_t){
         .gpio_num = RG_GPIO_LCD_BCKL,

@@ -34,6 +34,17 @@ python rg_tool.py --target esplay-micro --port COM9 --baud 460800 install
 - **游戏中**: `MENU` → 游戏内菜单（存档/读档/退出）, `SELECT+A` → 设置
 - **退出游戏**: 按 MENU → 选择 Quit
 
+## Display
+| 参数 | 值 | 说明 |
+|------|----|------|
+| ILI9341 刷新率 | 70 Hz | 寄存器 0xB1=0x1B |
+| SPI 时钟 | 40 MHz | SPI_MASTER_FREQ_40M |
+| 背光 PWM 频率 | **20 kHz** | 超出人耳可听范围，消除啸叫 |
+| PWM 分辨率 | **10-bit** | LEDC_TIMER_10_BIT，20 kHz 下最大占空比 0x3FF |
+| 分辨率 | 320×240 | ILI9341 RGB565 |
+
+> 背光 PWM 从默认的 5 kHz/13-bit 提升至 20 kHz/10-bit（参考 esplay-neo-firmware），对 PWM 敏感人群更护眼。
+
 # Hardware info
 - ESP32-WROVER-B (SoC 16MB Flash + 8MB PSRAM)
 - PCF8574 I2C GPIO (To connect the extra buttons)
