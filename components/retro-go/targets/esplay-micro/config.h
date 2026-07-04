@@ -55,20 +55,26 @@
 // Input
 // Refer to rg_input.h to see all available RG_KEY_* and RG_GAMEPAD_*_MAP types
 // A and B silkscreen on the board are swapped relative to standard Nintendo layout
-// Temporarily unmapped menu and option. Start + Select activates menu.
+// I2C PCF8574 @0x20 (active low): bit 0=START, 1=SELECT, 2=UP, 3=DOWN, 4=LEFT, 5=RIGHT, 6=A, 7=B
 #define RG_GAMEPAD_I2C_MAP {\
+    {RG_KEY_START,  .num = 0, .level = 0},\
+    {RG_KEY_SELECT, .num = 1, .level = 0},\
     {RG_KEY_UP,     .num = 2, .level = 0},\
-    {RG_KEY_RIGHT,  .num = 5, .level = 0},\
     {RG_KEY_DOWN,   .num = 3, .level = 0},\
     {RG_KEY_LEFT,   .num = 4, .level = 0},\
-    {RG_KEY_SELECT, .num = 1, .level = 0},\
-    {RG_KEY_START,  .num = 8, .level = 0},\
-    {RG_KEY_A,      .num = 7, .level = 0},\
-    {RG_KEY_B,      .num = 6, .level = 0},\
+    {RG_KEY_RIGHT,  .num = 5, .level = 0},\
+    {RG_KEY_A,      .num = 6, .level = 0},\
+    {RG_KEY_B,      .num = 7, .level = 0},\
 }
+// Direct GPIO (active low with external pull-ups): MENU=GPIO35, L=GPIO36, R=GPIO34
+#define RG_GAMEPAD_GPIO_MAP {\
+    {RG_KEY_MENU,   .num = GPIO_NUM_35, .level = 0},\
+    {RG_KEY_L,      .num = GPIO_NUM_36, .level = 0},\
+    {RG_KEY_R,      .num = GPIO_NUM_34, .level = 0},\
+}
+// Virtual key combos
 #define RG_GAMEPAD_VIRT_MAP {\
-    {RG_KEY_MENU,   .src = RG_KEY_START | RG_KEY_SELECT},\
-    {RG_KEY_OPTION, .src = RG_KEY_SELECT | RG_KEY_A    },\
+    {RG_KEY_OPTION, .src = RG_KEY_SELECT | RG_KEY_A},\
 }
 
 // Battery
