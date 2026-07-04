@@ -1,3 +1,6 @@
+# retro-go for ESPlay Micro
+> 构建及按键说明：[components/retro-go/targets/esplay-micro/docs/README.md](components/retro-go/targets/esplay-micro/docs/README.md)
+
 # Table of contents
 - [Description](#description)
 - [Installation](#installation)
